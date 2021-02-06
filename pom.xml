@@ -14,7 +14,7 @@
 	</parent>
 	<groupId>br.com.tonim</groupId>
 	<artifactId>pet-clinic</artifactId>
-	<version>0.0.2</version>
+	<version>0.0.3-SNAPSHOT</version>
 	<name>pet-clinic</name>
 	<description>Pet clinic with spring boot - learning purpose</description>
 	<properties>
@@ -47,7 +47,7 @@
 
 	<scm>
 		<developerConnection>scm:git:git@github.com:lucasrocha1313/spring-boot-pet-clinic.git</developerConnection>
-	  <tag>pet-clinic-0.0.2</tag>
+	  <tag>HEAD</tag>
   </scm>
 
 </project>
