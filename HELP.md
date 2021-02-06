@@ -1,7 +1,7 @@
 # Read Me First
 The following was discovered as part of building this project:
 
-* The original package name 'br.com.tonim.pet-clinic' is invalid and this project uses 'br.com.tonim.petclinic' instead.
+* The original package name 'br.com.tonim.pet-clinic' is invalid and this project uses 'petclinic' instead.
 
 # Getting Started
 

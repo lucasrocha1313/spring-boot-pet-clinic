@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/pet-clinic.iml" filepath="$PROJECT_DIR$/pet-clinic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pet-clinic-data/pet-clinic-data.iml" filepath="$PROJECT_DIR$/pet-clinic-data/pet-clinic-data.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pet-clinic-web/pet-clinic-web.iml" filepath="$PROJECT_DIR$/pet-clinic-web/pet-clinic-web.iml" />
     </modules>
   </component>
 </project>
