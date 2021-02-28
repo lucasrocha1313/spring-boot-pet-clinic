@@ -3,9 +3,11 @@ package br.com.tonim.petclinic.services.map;
 import br.com.tonim.petclinic.model.Owner;
 import br.com.tonim.petclinic.services.CrudService;
 import br.com.tonim.petclinic.services.OwnerService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+@Service
 public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService {
     @Override
     public Owner findById(Long id) {
