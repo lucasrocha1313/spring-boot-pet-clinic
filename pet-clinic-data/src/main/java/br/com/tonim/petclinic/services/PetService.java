@@ -1,4 +1,6 @@
 package br.com.tonim.petclinic.services;
 
-public interface PetService<Pet,Long> {
+import br.com.tonim.petclinic.model.Pet;
+
+public interface PetService extends CrudService<Pet,Long> {
 }
