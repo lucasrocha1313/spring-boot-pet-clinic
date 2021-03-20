@@ -1,5 +1,6 @@
 package br.com.tonim.petclinic.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class Owner extends Person{
@@ -37,6 +38,9 @@ public class Owner extends Person{
     }
 
     public void setPets(Set<Pet> pets) {
+        if(this.pets == null) {
+            this.pets = new HashSet<>();
+        }
         this.pets = pets;
     }
 }
