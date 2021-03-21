@@ -1,17 +1,14 @@
 package br.com.tonim.petclinic.bootstrap;
 
-import br.com.tonim.petclinic.model.Owner;
-import br.com.tonim.petclinic.model.Pet;
-import br.com.tonim.petclinic.model.PetType;
-import br.com.tonim.petclinic.model.Vet;
+import br.com.tonim.petclinic.model.*;
 import br.com.tonim.petclinic.services.OwnerService;
 import br.com.tonim.petclinic.services.PetTypeService;
+import br.com.tonim.petclinic.services.SpecialityService;
 import br.com.tonim.petclinic.services.VetService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 
@@ -21,15 +18,23 @@ public class DataLoader implements CommandLineRunner {
     private final OwnerService ownerService;
     private final VetService vetService;
     private final PetTypeService petTypeService;
+    private final SpecialityService specialityService;
 
-    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService) {
+    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService,
+                      SpecialityService specialityService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
+        this.specialityService = specialityService;
     }
 
     @Override
     public void run(String... args) throws Exception {
+        if(petTypeService.findAll().size() == 0)
+            loadData();
+    }
+
+    private void loadData() {
         var dog = new PetType();
         dog.setName("dog");
         var dogSaved = petTypeService.save(dog);
@@ -37,6 +42,18 @@ public class DataLoader implements CommandLineRunner {
         var cat = new PetType();
         dog.setName("cat");
         var catSaved = petTypeService.save(cat);
+
+        var radiology = new Speciality();
+        radiology.setDescription("Radiology");
+        var savedRadiology = specialityService.save(radiology);
+
+        var surgery = new Speciality();
+        surgery.setDescription("Surgery");
+        var savedSurgery = specialityService.save(surgery);
+
+        var dentistry = new Speciality();
+        dentistry.setDescription("Dentistry");
+        var savedDentistry = specialityService.save(dentistry);
 
         var owner1 = new Owner();
         owner1.setFirstName("Tonim");
@@ -75,11 +92,13 @@ public class DataLoader implements CommandLineRunner {
         var vet1 = new Vet();
         vet1.setFirstName("Zoy");
         vet1.setLastName("D'Lula");
+        vet1.setSpecialities(new HashSet<>(Arrays.asList(radiology)));
         vetService.save(vet1);
 
         var vet2 = new Vet();
         vet2.setFirstName("Luna");
         vet2.setLastName("Chata");
+        vet2.setSpecialities(new HashSet<>(Arrays.asList(surgery)));
         vetService.save(vet2);
 
         System.out.println("Loaded Vets...");
