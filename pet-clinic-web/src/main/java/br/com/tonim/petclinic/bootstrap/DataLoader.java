@@ -1,10 +1,7 @@
 package br.com.tonim.petclinic.bootstrap;
 
 import br.com.tonim.petclinic.model.*;
-import br.com.tonim.petclinic.services.OwnerService;
-import br.com.tonim.petclinic.services.PetTypeService;
-import br.com.tonim.petclinic.services.SpecialityService;
-import br.com.tonim.petclinic.services.VetService;
+import br.com.tonim.petclinic.services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -19,13 +16,15 @@ public class DataLoader implements CommandLineRunner {
     private final VetService vetService;
     private final PetTypeService petTypeService;
     private final SpecialityService specialityService;
+    private final VisitService visitService;
 
     public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService,
-                      SpecialityService specialityService) {
+                      SpecialityService specialityService, VisitService visitService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.specialityService = specialityService;
+        this.visitService = visitService;
     }
 
     @Override
@@ -86,6 +85,13 @@ public class DataLoader implements CommandLineRunner {
         owner2.setPets(new HashSet<>(Arrays.asList(rosCat)));
 
         ownerService.save(owner2);
+
+        var catVisit = new Visit();
+        catVisit.setPet(rosCat);
+        catVisit.setDescription("Sneezy Kitty");
+        catVisit.setDate(LocalDate.now());
+
+        visitService.save(catVisit);
 
         System.out.println("Loaded Owners...");
 

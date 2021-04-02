@@ -2,9 +2,10 @@ package br.com.tonim.petclinic.services.map;
 
 import br.com.tonim.petclinic.model.Visit;
 import br.com.tonim.petclinic.services.VisitService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
-
+@Service
 public class VisitMapService extends AbstractMapService<Visit, Long> implements VisitService {
     @Override
     public Visit findById(Long id) {
