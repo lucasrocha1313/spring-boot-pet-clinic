@@ -3,11 +3,13 @@ package br.com.tonim.petclinic.services.map;
 import br.com.tonim.petclinic.model.Vet;
 import br.com.tonim.petclinic.services.SpecialityService;
 import br.com.tonim.petclinic.services.VetService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 @Service
+@Profile({"default", "map"})
 public class VetMapService extends AbstractMapService<Vet,Long> implements VetService {
     private final SpecialityService specialityService;
 

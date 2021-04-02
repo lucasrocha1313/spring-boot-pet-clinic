@@ -2,11 +2,13 @@ package br.com.tonim.petclinic.services.map;
 
 import br.com.tonim.petclinic.model.PetType;
 import br.com.tonim.petclinic.services.PetTypeService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 @Service
+@Profile({"default", "map"})
 public class PetTypeMapService extends AbstractMapService<PetType,Long> implements PetTypeService {
     @Override
     public PetType findById(Long id) {
