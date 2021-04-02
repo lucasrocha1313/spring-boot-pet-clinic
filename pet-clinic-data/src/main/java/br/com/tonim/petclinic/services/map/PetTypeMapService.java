@@ -1,26 +1,25 @@
 package br.com.tonim.petclinic.services.map;
 
-import br.com.tonim.petclinic.model.Pet;
-import br.com.tonim.petclinic.services.CrudService;
-import br.com.tonim.petclinic.services.PetService;
+import br.com.tonim.petclinic.model.PetType;
+import br.com.tonim.petclinic.services.PetTypeService;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 @Service
-public class PetServiceMap extends AbstractMapService<Pet,Long> implements PetService {
+public class PetTypeMapService extends AbstractMapService<PetType,Long> implements PetTypeService {
     @Override
-    public Pet findById(Long id) {
+    public PetType findById(Long id) {
         return super.findById(id);
     }
 
     @Override
-    public Pet save(Pet object) {
+    public PetType save(PetType object) {
         return super.save(object);
     }
 
     @Override
-    public Set<Pet> findAll() {
+    public Set<PetType> findAll() {
         return super.findAll();
     }
 
@@ -30,7 +29,7 @@ public class PetServiceMap extends AbstractMapService<Pet,Long> implements PetSe
     }
 
     @Override
-    public void delete(Pet object) {
+    public void delete(PetType object) {
         super.delete(object);
     }
 }
