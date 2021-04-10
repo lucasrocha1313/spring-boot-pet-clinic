@@ -40,7 +40,6 @@ public class OwnerSDJpaService implements OwnerService {
     public Set<Owner> findAll() {
         var owners = new HashSet<Owner>();
         ownerRepository.findAll().forEach(owners::add);
-
         return owners;
     }
 
