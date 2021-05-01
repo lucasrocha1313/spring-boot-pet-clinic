@@ -39,7 +39,7 @@ public class DataLoader implements CommandLineRunner {
         var dogSaved = petTypeService.save(dog);
 
         var cat = new PetType();
-        dog.setName("cat");
+        cat.setName("cat");
         var catSaved = petTypeService.save(cat);
 
         var radiology = new Speciality();
@@ -60,7 +60,6 @@ public class DataLoader implements CommandLineRunner {
         owner1.setAddress("Rua Altinopolis, 751");
         owner1.setCity("BH");
         owner1.setTelephone("666666666");
-        ownerService.save(owner1);
 
         var tonimPet = new Pet();
         tonimPet.setPetType(dogSaved);
@@ -69,6 +68,7 @@ public class DataLoader implements CommandLineRunner {
         tonimPet.setName("Luna");
         owner1.setPets(new HashSet<>(Arrays.asList(tonimPet)));
 
+        ownerService.save(owner1);
 
         var owner2 = new Owner();
         owner2.setFirstName("Roshcarch");
@@ -78,6 +78,7 @@ public class DataLoader implements CommandLineRunner {
         owner2.setTelephone("982901889183");
 
         var rosCat = new Pet();
+        rosCat.setPetType(catSaved);
         rosCat.setName("Fiona");
         rosCat.setBirthDate(LocalDate.now().minusDays(23));
         rosCat.setPetType(catSaved);
