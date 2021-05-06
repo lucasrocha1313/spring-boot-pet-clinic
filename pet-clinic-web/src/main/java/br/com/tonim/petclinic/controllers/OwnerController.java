@@ -6,15 +6,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/owners")
 public class OwnerController {
+    private static final String VIEWS_OWNER_CREATE_OR_UPDATE = "owners/createOrUpdateOwnerForm";
 
     private final OwnerService ownerService;
 
@@ -34,7 +32,7 @@ public class OwnerController {
     }
 
     @GetMapping("/{ownerId}")
-    public ModelAndView showOwner(@PathVariable("ownerId") Long ownerId) {
+    public ModelAndView showOwner(@PathVariable Long ownerId) {
         var mav = new ModelAndView("owners/ownerDetails");
         mav.addObject(ownerService.findById(ownerId));
         return mav;
@@ -57,4 +55,38 @@ public class OwnerController {
             return "owners/ownersList";
         }
     }
+
+    @GetMapping("/new")
+    public String initCreationForm(Model model) {
+        model.addAttribute("owner", Owner.builder().build());
+        return VIEWS_OWNER_CREATE_OR_UPDATE;
+    }
+
+    @PostMapping("/new")
+    public String processCreationForm(Owner owner, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            return VIEWS_OWNER_CREATE_OR_UPDATE;
+        } else {
+            var savedOwner = ownerService.save(owner);
+            return "redirect:/owners/"+savedOwner.getId();
+        }
+    }
+
+    @GetMapping("/{ownerId}/edit")
+    public String initUpdateOwnerForm(@PathVariable Long ownerId, Model model) {
+        model.addAttribute("owner", ownerService.findById(ownerId));
+        return VIEWS_OWNER_CREATE_OR_UPDATE;
+    }
+
+    @PostMapping("/{ownerId}/edit")
+    public String processUpdateOwnerForm(Owner owner, BindingResult bindingResult, @PathVariable Long ownerId){
+        if(bindingResult.hasErrors()){
+            return VIEWS_OWNER_CREATE_OR_UPDATE;
+        } else {
+            owner.setId(ownerId);
+            var ownerSaved = ownerService.save(owner);
+            return "redirect:/owners/" + ownerSaved.getId();
+        }
+    }
+
 }
