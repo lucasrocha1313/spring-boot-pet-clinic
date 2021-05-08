@@ -19,7 +19,8 @@ public class Owner extends Person{
         this.address = address;
         this.city = city;
         this.telephone = telephone;
-        this.pets = pets;
+        if(pets != null)
+            this.pets = pets;
     }
 
     public Owner(String address, String city, String telephone, Set<Pet> pets) {
@@ -38,4 +39,19 @@ public class Owner extends Person{
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
     private Set<Pet> pets = new HashSet<>();
 
+    public Pet getPet(String name) {
+        return getPet(name, false);
+    }
+
+    public Pet getPet(String name, boolean igneoreNew) {
+        for(var pet: pets) {
+            if(!igneoreNew || !pet.isNew()){
+                var compName = pet.getName();
+                if(compName.equalsIgnoreCase(pet.getName())){
+                    return pet;
+                }
+            }
+        }
+        return null;
+    }
 }
